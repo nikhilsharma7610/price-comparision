@@ -52,6 +52,86 @@ mvn clean install -DskipTests
         - GET /_cluster/health
         - GET /product/_search
 
+## Run application
+- run command
+    - mvn spring-boot:run
+- Check application running via ping url
+    - curl --request GET 'http://localhost:8080/ping'
+
+## Sample Requests
+- Add Product
+    - curl --location --request POST 'http://localhost:8080/partner/v1/product' \
+       --header 'Content-Type: application/json' \
+       --data-raw '{
+           "providerId" : "P1",
+           "providerName" : "Partner1",
+           "productName" : "Fruity",
+           "categoryId" : "FNB",
+           "categoryName" : "Food & Drinks",
+           "price" : 10.0
+       }'
+     - Params description
+        - productName : mendatory
+        - providerId : mendatory
+        - providerName : mendatory
+        - categoryId : mendatory
+        - categoryName : mendatory
+        - price : mendatory
+- Update Product
+    - curl --location --request PUT 'http://localhost:8080/partner/v1/product' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+          "providerId" : "P1",
+          "providerName" : "Partner1",
+          "productName" : "Fruity",
+          "categoryId" : "FNB",
+          "categoryName" : "Food & Drinks",
+          "price" : 12.0
+      }'
+    - Params description
+      - productName : mendatory
+      - providerId : mendatory
+      - categoryId : mendatory
+      - price : mendatory
+- Search Products
+    - curl --request GET 'http://localhost:8080/v1/search?category=FNB&productName=fruity'
+    - Sample response
+        - [
+              {
+                  "productId": "21ec5690-c74a-471f-9f46-8f1a37e25e49",
+                  "providerId": "P1",
+                  "providerName": "Partner1",
+                  "productName": "Fruity",
+                  "categoryId": "FNB",
+                  "categoryName": "Food & Drinks",
+                  "description": null,
+                  "price": 5.0,
+                  "rank": 1.0
+              },
+              {
+                  "productId": "58449dc2-1b05-4f01-b11a-8a0572ad6682",
+                  "providerId": "P2",
+                  "providerName": "Partner1",
+                  "productName": "Fruity",
+                  "categoryId": "FNB",
+                  "categoryName": "Food & Drinks",
+                  "description": null,
+                  "price": 5.0,
+                  "rank": 1.0
+              },
+              {
+                  "productId": "6363e9c7-ca30-49ed-b8f2-81c74792e468",
+                  "providerId": "P3",
+                  "providerName": "Partner2",
+                  "productName": "Fruity",
+                  "categoryId": "FNB",
+                  "categoryName": "Food & Drinks",
+                  "description": null,
+                  "price": 10.0,
+                  "rank": 75.0
+              }
+          ]  
+
 ## To Do / Improvements
 - Updating rank on getting price update is done for the recipient product only, 
 already max & min price products need to be updated as well in relative to recipient product
