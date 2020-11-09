@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="DEFAULT_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %m%n"/>
+    <Property name="PATH" value="~" />
+    <property name="APP_NAME" value="price-comparision"/>
+
+    <!-- default console appender -->
+    <appender name="DEFAULT_CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${DEFAULT_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- root logger -->
+    <root level="INFO">
+        <appender-ref ref="DEFAULT_CONSOLE_APPENDER"/>
+    </root>
+</configuration>
